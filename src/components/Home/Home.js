@@ -1,19 +1,20 @@
+import React, {  useContext } from 'react';
+import Categories from '../Categories/Categories';
+import { categoryContext } from '../../App';
+import Product from '../Product/Product';
 
-import React, { useEffect, useState } from 'react';
-import Friend from '../Friend/Friend';
-const Home = () => {
-  const [friends,setFriends] = useState([]); 
-   useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(res => res.json())
-    .then(data => setFriends(data))
-   },[]);
+const Home = (props) => {
+    // const {count,setCount} = props;
+    const [category,setCategory] = useContext(categoryContext);
     return (
         <div>
-            <h1>Friends: {friends.length}</h1>
-      {
-        friends.map( pd => <Friend friend={pd}></Friend>)
-      }
+            <h1 >This is Home: {category}</h1>
+            <button onClick={() => setCategory(category+1)}>Increment</button><br />
+            <button onClick={() => setCategory(category>0 ? category-1 : category)}>Decrement</button>
+            <hr />
+            <Categories></Categories>
+           
+            
         </div>
     );
 };
